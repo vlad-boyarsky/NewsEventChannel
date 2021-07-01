@@ -3,17 +3,26 @@
 namespace App\EventChannel;
 
 use App\EventChannel\Interfaces\EventChannelInterface;
+use App\Subscriber\Interfaces\SubscriberInterface;
 
 class EventChannel implements EventChannelInterface
 {
 
-    public function publish()
+    private array $news = [];
+
+    public function publish(string $news, string $text): void
     {
-        // TODO: Implement publish() method.
+        foreach ($this->news[$news] as $subscriberNews) {
+            $subscriberNews->notify($text);
+        }
     }
 
-    public function subscribe()
+    public function subscribe(string $news, SubscriberInterface $subscriber)
     {
-        // TODO: Implement subscribe() method.
+        $this->news[$news][] = $subscriber;
+
+        $info = $subscriber->getName() . " subscribe on " . "'" . $news . "'" . " [" . date('Y-m-d H:i:s') . "]";
+
+        echo $info;
     }
 }
