@@ -10,28 +10,18 @@ require __DIR__ . '/vendor/autoload.php';
 
 $eventChannel = new EventChannel();
 
-$sandoraJuice = new NewsPublisher('Sandora Juice', $eventChannel);
-echo '<pre>';
-var_dump($sandoraJuice);
-echo '</pre>';
-$richJuice = new NewsPublisher('Rich Juice', $eventChannel);
-$wellDoneJuice = new NewsPublisher('Well Done Juice', $eventChannel);
+$timesNews = new NewsPublisher('Times News', $eventChannel);
+$newNews = new NewsPublisher('New News', $eventChannel);
+$oktoNews = new NewsPublisher('Okto news', $eventChannel);
 
-$axelSubscriber = new Subscriber('Axel');
-echo '<pre>';
-var_dump($axelSubscriber);
-echo '</pre>';
+$aslanSubscriber = new Subscriber('Aslan');
 $alexSubscriber = new Subscriber('Alex');
 $ronSubscriber = new Subscriber('Ron');
 
-echo $eventChannel->subscribe('Sandora Juice', $axelSubscriber) . "<br>";
-
-echo '<pre>';
-var_dump($eventChannel);
-echo '</pre>';
-echo $eventChannel->subscribe('Rich Juice', $alexSubscriber) . "<br>";
-echo $eventChannel->subscribe('Well Done Juice', $ronSubscriber) . "<br>";
+echo $eventChannel->subscribe('Times News', $aslanSubscriber) . "<br>";
+echo $eventChannel->subscribe('New News', $alexSubscriber) . "<br>";
+echo $eventChannel->subscribe('Okto news', $ronSubscriber) . "<br>";
 echo "<br>";
-echo $sandoraJuice->publish('We have new Orange Juice') . "<br>";
-echo $richJuice->publish('We have new Apple Juice') . "<br>";
-echo $wellDoneJuice->publish('We have new Coconut Juice') . "<br>";
+echo $timesNews->publish('New "Times News"') . "<br>";
+echo $newNews->publish('New "New News"') . "<br>";
+echo $oktoNews->publish('New "Okto News"') . "<br>";
